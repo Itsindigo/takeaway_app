@@ -8,10 +8,8 @@ RSpec.describe Menu do
     expect(Menu.print_menu).to be_a(Hash)
   end
 
-  it "selects a meal and assigns meal choice to a variable" do
-    stub_const("Menu::MENU", {fries: 2.00})
-    menu.select_meal(choice: :fries, quantity: 1)
-    expect(menu.meal_choice).to eq([:fries])
-    expect(menu.choice_cost).to eq(2.00)
+  it "selects a meal" do
+    selection = menu.select_meal(choice: :fries, quantity: 1)
+    expect(selection).to eq({ item: {fries: 2.00}, quantity: 1 })
   end
 end

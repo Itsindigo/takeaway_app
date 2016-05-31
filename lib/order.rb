@@ -10,12 +10,29 @@ class Order
     @cost = 0
   end
 
-  def order_meal
-    @ordered_items << @menu.meal_choice
-    @cost += @menu.choice_cost
+  def add_meal_to_order
+    @cost += (meal_price * meal_quantity)
+    @ordered_items << your_meal * meal_quantity
+    format_ordered_items
   end
 
-  private
 
+  private
+  def format_ordered_items
+    @ordered_items.flatten.map {|x| x.to_s}
+  end
+
+  def your_meal
+    @menu.meal_choice[:item].keys
+  end
+
+
+  def meal_price
+    @menu.meal_choice[:item].values[0]
+  end
+
+  def meal_quantity
+    @menu.meal_choice[:quantity]
+  end
 
 end

@@ -9,20 +9,15 @@ RSpec.describe Order do
 
   end
 
-  it "push your meal choice into the ordered items array" do
-    allow(menu).to receive(:meal_choice).and_return(pizza)
-    allow(menu).to receive(:choice_cost).and_return(4.00)
-    order.order_meal
-    expect(order.ordered_items).to eq([pizza])
-  end
+  context '#add_meal_to_order' do
+    it "adds a meal to ordered_items" do
+      allow(menu).to receive(:meal_choice).and_return({item: {fries: 2.00}, quantity: 1})
+      expect{order.add_meal_to_order}.to change{order.ordered_items.size}.by(1)
+    end
 
-  it "totalises the cost of your order as meals are added" do
-    allow(menu).to receive(:meal_choice).and_return(pizza)
-    allow(menu).to receive(:choice_cost).and_return(4.00)
-    order.order_meal
-    order.order_meal
-    expect(order.cost).to eq(8.00)
+    it "adds the costs of quantity of meals to the cost attribute" do
+      allow(menu).to receive(:meal_choice).and_return({item: {fries: 2.00}, quantity: 2})
+      expect{order.add_meal_to_order}.to change{order.cost}.by(4.00)
+    end
   end
-
-  
 end

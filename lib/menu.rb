@@ -12,21 +12,13 @@ class Menu
   }.freeze
 
   def self.print_menu
-    MENU
+    MENU.map do |meal, price|
+      "%s £%.2f" % [meal.to_s.capitalize, price]
+    end.join(", ")
   end
 
-  def select_meal(choice: choice, quantity: quantity)
-    item = MENU.select { |name, price| name == choice }
+  def select_meal(meal: meal, quantity: quantity)
+    item = MENU.select { |name, price| name == meal }
     @meal_choice = { item: item, quantity: quantity }
   end
-
-
 end
-
-# brewhouse.io
-
-# methods are either commands or queries -
-# if it's a command, you shouldn't care about the return value
-# AND it will change the state of something
-# if it's query, you're asking for a value, and it shouldn't change
-# the state

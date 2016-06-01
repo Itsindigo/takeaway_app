@@ -1,5 +1,4 @@
 require 'basket.rb'
-require 'byebug'
 
 RSpec.describe Basket do
   subject(:basket){described_class.new(menu)}

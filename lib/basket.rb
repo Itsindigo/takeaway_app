@@ -10,7 +10,7 @@ class Basket
   end
 
   def add_meal_to_basket
-    @basket_items << @menu.meal_choice
+    basket_items << @menu.meal_choice
   end
 
   def calculate_cost

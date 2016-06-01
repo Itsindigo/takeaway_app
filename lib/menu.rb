@@ -17,8 +17,9 @@ class Menu
     end.join(", ")
   end
 
-  def select_meal(meal: meal, quantity: quantity)
-    item = MENU.select { |name, price| name == meal }
-    @meal_choice = { item: item, quantity: quantity }
+
+  def price(meal)
+    MENU[meal]
   end
+
 end

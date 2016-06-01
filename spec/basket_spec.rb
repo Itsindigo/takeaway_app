@@ -3,7 +3,7 @@ require 'basket.rb'
 RSpec.describe Basket do
   subject(:basket){described_class.new(menu)}
   let(:menu){double (:menu)}
-  let(:pizza){double (:meal_choice)}
+  let(:pizza){double (:pizza)}
 
   before do
 
@@ -11,15 +11,15 @@ RSpec.describe Basket do
 
   context '#add_meal_to_basket' do
     it "adds a meal to basket_items" do
-      allow(menu).to receive(:meal_choice).and_return({item: {fries: 2.00}, quantity: 1})
-      expect{basket.add_meal_to_basket}.to change{basket.basket_items.size}.by(1)
+      basket.add_meal_to_basket(meal: pizza, quantity: 3)
+      expect(basket.basket_items[pizza]).to eq 3
     end
   end
 
-  context "#calculate_cost" do
+  context "#basket_total" do
     it "returns the cost of basket items" do
-      allow(basket).to receive(:basket_items).and_return([{item:{chicken_kebab: 4.0}, quantity: 1}, {item:{fries: 2.0}, quantity:2}])
-      expect(basket.calculate_cost).to eq(8.0)
+      allow(basket).to receive(:item_totals).and_return([1, 3, 5, 7])
+      expect(basket.basket_total).to eq(16)
     end
   end
 end
